@@ -10,3 +10,11 @@ Binary builds are available at:
 dnf copr enable shassard/nim
 dnf install nim
 ```
+
+## Next Steps
+
+Install the LSP server:
+
+```bash
+nimble install nimlangserver
+```
