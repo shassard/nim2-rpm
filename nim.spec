@@ -3,7 +3,7 @@
 Summary: A statically typed compiled systems programming language
 Name: nim
 Version: 1.6.6
-Release: 3
+Release: 4
 License: MIT
 Group: Development/Languages
 Source: https://nim-lang.org/download/%{name}-%{version}.tar.xz
@@ -32,16 +32,17 @@ bin/nim c koch
 mkdir -p %{buildroot}/%{_bindir}
 install -m 0755 bin/* %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_datadir}/%{name}
+sed -i '1i lib = "%{_datadir}/%{name}/lib"' config/nim.cfg
+sed -i '1i path = "%{_datadir}/%{name}"' config/nim.cfg
+cp -R config %{buildroot}/%{_datadir}/%{name}/config
 cp -R compiler %{buildroot}/%{_datadir}/%{name}/compiler
 cp -R doc %{buildroot}/%{_datadir}/%{name}/doc
 cp -R lib %{buildroot}/%{_datadir}/%{name}/lib
 cp -R nimpretty %{buildroot}/%{_datadir}/%{name}/nimpretty
 cp -R nimsuggest %{buildroot}/%{_datadir}/%{name}/nimsuggest
 cp -R testament %{buildroot}/%{_datadir}/%{name}/testament
-sed -i '1i lib = "%{_datadir}/%{name}/lib"' config/nim.cfg
-sed -i '1i path = "%{_datadir}/%{name}"' config/nim.cfg
 mkdir -p %{buildroot}/%{_sysconfdir}/%{name}
-install config/nim.cfg %{buildroot}/%{_sysconfdir}/%{name}
+ln -f -s -t %{buildroot}/%{_sysconfdir}/%{name} nim.cfg %{_datadir}/%{name}/config/nim.cfg
 
 %files
 %{_bindir}/atlas
@@ -54,9 +55,11 @@ install config/nim.cfg %{buildroot}/%{_sysconfdir}/%{name}
 %{_bindir}/nimsuggest
 %{_bindir}/testament
 %{_datadir}/%{name}
-%{_sysconfdir}/%{name}/nim.cfg
+%{_sysconfdir}/%{name}
 
 %changelog
+* Sun Aug 28 2022 Stephen Hassard <steve@hassard.net> - 1.6.6-4
+- Move config folder, but symlink it to the previous location to improve nimlsp usage.
 * Sun Aug 28 2022 Stephen Hassard <steve@hassard.net> - 1.6.6-3
 - Rework pathing so we don't litter stuff around the wrong place.
 - Add path to nim.cfg so we find bits in the new path layout.
