@@ -3,7 +3,7 @@
 Summary: A statically typed compiled systems programming language
 Name: nim
 Version: 1.6.6
-Release: 2
+Release: 3
 License: MIT
 Group: Development/Languages
 Source: https://nim-lang.org/download/%{name}-%{version}.tar.xz
@@ -31,15 +31,17 @@ bin/nim c koch
 %install
 mkdir -p %{buildroot}/%{_bindir}
 install -m 0755 bin/* %{buildroot}/%{_bindir}
-mkdir -p %{buildroot}/%{_libdir}
-cp -R lib %{buildroot}/%{_libdir}/nim
-cp -R compiler %{buildroot}/%{_prefix}/compiler
-cp -R nimpretty %{buildroot}/%{_prefix}/nimpretty
-cp -R nimsuggest %{buildroot}/%{_prefix}/nimsuggest
-cp -R testament %{buildroot}/%{_prefix}/testament
-sed -i '1i lib = "/usr/lib64/nim"' config/nim.cfg
-mkdir -p %{buildroot}/%{_sysconfdir}/nim
-install config/nim.cfg %{buildroot}/%{_sysconfdir}/nim
+mkdir -p %{buildroot}/%{_datadir}/%{name}
+cp -R compiler %{buildroot}/%{_datadir}/%{name}/compiler
+cp -R doc %{buildroot}/%{_datadir}/%{name}/doc
+cp -R lib %{buildroot}/%{_datadir}/%{name}/lib
+cp -R nimpretty %{buildroot}/%{_datadir}/%{name}/nimpretty
+cp -R nimsuggest %{buildroot}/%{_datadir}/%{name}/nimsuggest
+cp -R testament %{buildroot}/%{_datadir}/%{name}/testament
+sed -i '1i lib = "%{_datadir}/%{name}/lib"' config/nim.cfg
+sed -i '1i path = "%{_datadir}/%{name}"' config/nim.cfg
+mkdir -p %{buildroot}/%{_sysconfdir}/%{name}
+install config/nim.cfg %{buildroot}/%{_sysconfdir}/%{name}
 
 %files
 %{_bindir}/atlas
@@ -51,14 +53,14 @@ install config/nim.cfg %{buildroot}/%{_sysconfdir}/nim
 %{_bindir}/nimpretty
 %{_bindir}/nimsuggest
 %{_bindir}/testament
-%{_libdir}/nim
-%{_prefix}/compiler
-%{_prefix}/nimpretty
-%{_prefix}/nimsuggest
-%{_prefix}/testament
-%{_sysconfdir}/nim/nim.cfg
+%{_datadir}/%{name}
+%{_sysconfdir}/%{name}/nim.cfg
 
 %changelog
+* Sun Aug 28 2022 Stephen Hassard <steve@hassard.net> - 1.6.6-3
+- Rework pathing so we don't litter stuff around the wrong place.
+- Add path to nim.cfg so we find bits in the new path layout.
+- Add missing doc folder
 * Thu Jul 28 2022 Stephen Hassard <steve@hassard.net> - 1.6.6-2
 - Add gcc dep for builds
 * Thu May 5 2022 Stephen Hassard <steve@hassard.net> - 1.6.6-1
