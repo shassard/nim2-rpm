@@ -16,5 +16,5 @@ dnf install nim
 Install the LSP server:
 
 ```bash
-nimble install nimlangserver
+nimble install nimlsp --define:explicitSourcePath=/usr/share/nim
 ```
