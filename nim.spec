@@ -2,7 +2,7 @@
 
 Summary: A statically typed compiled systems programming language
 Name: nim
-Version: 1.6.8
+Version: 1.6.10
 Release: 1
 License: MIT
 Group: Development/Languages
@@ -11,12 +11,6 @@ URL: https://nim-lang.org/
 BuildRequires: gcc
 BuildRequires: pcre2-devel
 BuildRequires: openssl-devel
-%if 0%{?el9}
-Requires: compat-openssl11
-%endif
-%if 0%{?fedora} >= 36
-Requires: openssl1.1
-%endif
 Requires: gcc
 
 %description
@@ -63,6 +57,9 @@ ln -f -s -t %{buildroot}/%{_sysconfdir}/%{name} nim.cfg %{_datadir}/%{name}/conf
 %{_sysconfdir}/%{name}
 
 %changelog
+* Wed Nov 23 2022 Stephen Hassard <steve@hassard.net> - 1.6.10-1
+- Bump to upstream 1.6.10
+- Remove openssl 1.0 compat libs, as 3.0 is supported upstream.
 * Tue Sep 27 2022 Stephen Hassard <steve@hassard.net> - 1.6.8-1
 - Bump to upstream 1.6.8
 * Sat Sep 10 2022 Stephen Hassard <steve@hassard.net> - 1.6.6-5
