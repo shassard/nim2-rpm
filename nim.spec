@@ -2,7 +2,7 @@
 
 Summary: A statically typed compiled systems programming language
 Name: nim
-Version: 2.0
+Version: 1.9.3
 Release: 1
 License: MIT
 Group: Development/Languages
@@ -57,7 +57,7 @@ ln -f -s -t %{buildroot}/%{_sysconfdir}/%{name} nim.cfg %{_datadir}/%{name}/conf
 %{_sysconfdir}/%{name}
 
 %changelog
-* Mon May 29 2023 Stephen Hassard <steve@hassard.net> - 2.0-beta-1
+* Mon May 29 2023 Stephen Hassard <steve@hassard.net> - 1.9.3-1
 - Use upstream latest-version-2.0 sources.
 * Mon May 29 2023 Stephen Hassard <steve@hassard.net> - 1.6.12-1
 - Bump to upstream 1.6.12
