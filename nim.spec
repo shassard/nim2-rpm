@@ -2,7 +2,7 @@
 
 Summary: A statically typed compiled systems programming language
 Name: nim
-Version: 1.6.10
+Version: 1.6.12
 Release: 1
 License: MIT
 Group: Development/Languages
@@ -57,6 +57,8 @@ ln -f -s -t %{buildroot}/%{_sysconfdir}/%{name} nim.cfg %{_datadir}/%{name}/conf
 %{_sysconfdir}/%{name}
 
 %changelog
+* Mon May 29 2023 Stephen Hassard <steve@hassard.net> - 1.6.12-1
+- Bump to upstream 1.6.12
 * Wed Nov 23 2022 Stephen Hassard <steve@hassard.net> - 1.6.10-1
 - Bump to upstream 1.6.10
 - Remove openssl 1.0 compat libs, as 3.0 is supported upstream.
