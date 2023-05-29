@@ -2,11 +2,11 @@
 
 Summary: A statically typed compiled systems programming language
 Name: nim
-Version: 1.6.12
+Version: 2.0-beta
 Release: 1
 License: MIT
 Group: Development/Languages
-Source: https://nim-lang.org/download/%{name}-%{version}.tar.xz
+Source: https://github.com/nim-lang/nightlies/releases/download/latest-version-2-0/source.tar.xz
 URL: https://nim-lang.org/
 BuildRequires: gcc
 BuildRequires: pcre2-devel
@@ -22,8 +22,8 @@ Ada and Modula.
 %setup -q
 
 %build
-sh build.sh
-bin/nim c koch
+sh ./build.sh
+./bin/nim c koch
 ./koch boot -d:release
 ./koch tools
 
@@ -57,6 +57,8 @@ ln -f -s -t %{buildroot}/%{_sysconfdir}/%{name} nim.cfg %{_datadir}/%{name}/conf
 %{_sysconfdir}/%{name}
 
 %changelog
+* Mon May 29 2023 Stephen Hassard <steve@hassard.net> - 2.0-beta-1
+- Use upstream latest-version-2.0 sources.
 * Mon May 29 2023 Stephen Hassard <steve@hassard.net> - 1.6.12-1
 - Bump to upstream 1.6.12
 * Wed Nov 23 2022 Stephen Hassard <steve@hassard.net> - 1.6.10-1
